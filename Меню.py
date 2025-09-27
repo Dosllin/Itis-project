@@ -80,6 +80,8 @@ def form_order():
         if sum_order > 500:
             print('Поздравляем, у вас скидка 10%!')
             print(f'Итого: {sum_order * 0.9} руб.')
+        else:
+            print(f'Итого: {sum_order} руб.')
         print('=' * 40)
         input('Введите что-нибудь, чтобы вернуться в меню: ')
     except TypeError:
@@ -122,3 +124,4 @@ while 1:
     except TypeError:
         print('Такой команды нет, попробуйте снова')
         input('Введите что-нибудь, чтобы вернуться в меню: ')
+
