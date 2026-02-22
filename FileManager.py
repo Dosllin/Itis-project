@@ -1,1 +1,102 @@
-import osclass NotesManager:    @staticmethod    def check_dir_exist(dir_name):        if not os.path.exists(dir_name):            os.makedirs(dir_name)    @staticmethod    def add_note(title,text):        NotesManager.check_dir_exist("notes")        with open(f'notes/{title}.txt','w', encoding="UTF-8") as file:            file.write(text)        print(f"Файл: '{title}' успешно создан")    @staticmethod    def list_notes():        NotesManager.check_dir_exist("notes")        if len(os.listdir('notes'))==0:            print('Заметок нет')        else:            print("Файлы:")            files = os.listdir('notes')            files[0] = '- '+ files[0]            print('\n- '.join(files))    @staticmethod    def read_note(title):        NotesManager.check_dir_exist("notes")        try:            with open(f'notes/{title}.txt','r', encoding="UTF-8") as file:                print(f"Текст файла '{title}':")                print(file.read())        except FileNotFoundError:            print(f"Файла '{title}' не существует")    @staticmethod    def deleate_note(title):        NotesManager.check_dir_exist("notes")        if os.path.exists(f'notes/{title}.txt'):            os.remove(f'notes/{title}.txt')            print(f"Файл '{title}' успешно удалён")        else:            print(f"Файла '{title}' не существует")    @staticmethod    def clear_notes():        NotesManager.check_dir_exist("notes")        for file in os.listdir('notes'):            os.remove(f'notes/{file}')        print("Заметки удаленны")# ТЕСТ# notes_manager = NotesManager()# notes_manager.list_notes()# notes_manager.add_note('Отложенные фильмы и сериалы на вечер', "Декстер, Mr.Robot")# notes_manager.add_note('Планы на 24 февраля', "Встать в 7, пойти в школу, расказать про ИТИС, собрать вещи, уехать в казань")# print('--------')# notes_manager.list_notes()# notes_manager.deleate_note("АБВ")# notes_manager.read_note("АБВ")# print('--------')# notes_manager.list_notes()# # notes_manager.clear_notes()# notes_manager.read_note("Отложенные фильмы и сериалы на вечер")# # notes_manager.clear_notes()# notes_manager.list_notes()notes = NotesManager()dict_comandos = {    1: notes.add_note,    2: notes.deleate_note,    3: notes.read_note,    4: notes.list_notes,    5: notes.clear_notes,}while True:    print(        "=======================",        "1. Создать заметку",        "2. Удалить заметку",        "3. Прочесть заметку",        "4. Список заметок",        "5. Удалить все заметки",        "6. Выйти",        "=======================",        sep='\n'    )    user_choise = input("Введите команду: ")    if user_choise == "2" or user_choise == '3':        user_title = input('Введите название файла: ')        dict_comandos[int(user_choise)](user_title)    elif user_choise == '1':        user_title = input('Введите название файла: ')        user_text = input("Введите текст: ")        dict_comandos[int(user_choise)](user_title, user_text)    elif user_choise == '6':        print("Досвидание!")        break    else:        dict_comandos[int(user_choise)]()    input("Введите что-нибудь, чтобы продолжить: ")
+import os
+class NotesManager:
+    @staticmethod
+    def check_dir_exist(dir_name):
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+    @staticmethod
+    def add_note(title,text):
+        NotesManager.check_dir_exist("notes")
+        with open(f'notes/{title}.txt','w', encoding="UTF-8") as file:
+            file.write(text)
+        print(f"Файл: '{title}' успешно создан")
+    @staticmethod
+    def list_notes():
+        NotesManager.check_dir_exist("notes")
+        if len(os.listdir('notes'))==0:
+            print('Заметок нет')
+        else:
+            print("Файлы:")
+            files = os.listdir('notes')
+            files[0] = '- '+ files[0]
+            print('\n- '.join(files))
+
+    @staticmethod
+    def read_note(title):
+        NotesManager.check_dir_exist("notes")
+        try:
+            with open(f'notes/{title}.txt','r', encoding="UTF-8") as file:
+                print(f"Текст файла '{title}':")
+                print(file.read())
+        except FileNotFoundError:
+            print(f"Файла '{title}' не существует")
+    @staticmethod
+    def deleate_note(title):
+        NotesManager.check_dir_exist("notes")
+        if os.path.exists(f'notes/{title}.txt'):
+            os.remove(f'notes/{title}.txt')
+            print(f"Файл '{title}' успешно удалён")
+        else:
+            print(f"Файла '{title}' не существует")
+
+    @staticmethod
+    def clear_notes():
+        NotesManager.check_dir_exist("notes")
+        for file in os.listdir('notes'):
+            os.remove(f'notes/{file}')
+        print("Заметки удаленны")
+
+# ТЕСТ
+# notes_manager = NotesManager()
+# notes_manager.list_notes()
+# notes_manager.add_note('Отложенные фильмы и сериалы на вечер', "Декстер, Mr.Robot")
+# notes_manager.add_note('Планы на 24 февраля', "Встать в 7, пойти в школу, расказать про ИТИС, собрать вещи, уехать в казань")
+# print('--------')
+# notes_manager.list_notes()
+# notes_manager.deleate_note("АБВ")
+# notes_manager.read_note("АБВ")
+# print('--------')
+# notes_manager.list_notes()
+# # notes_manager.clear_notes()
+# notes_manager.read_note("Отложенные фильмы и сериалы на вечер")
+# # notes_manager.clear_notes()
+# notes_manager.list_notes()
+
+notes = NotesManager()
+dict_comandos = {
+    1: notes.add_note,
+    2: notes.deleate_note,
+    3: notes.read_note,
+    4: notes.list_notes,
+    5: notes.clear_notes,
+}
+while True:
+    print(
+        "=======================",
+        "1. Создать заметку",
+        "2. Удалить заметку",
+        "3. Прочесть заметку",
+        "4. Список заметок",
+        "5. Удалить все заметки",
+        "6. Выйти",
+        "=======================",
+        sep='\n'
+    )
+    try:
+        user_choise = int(input("Введите команду: "))
+    except ValueError:
+        print("Введите число!")
+    else:
+        if user_choise == "2" or user_choise == '3':
+            user_title = input('Введите название файла: ')
+            dict_comandos[user_choise](user_title)
+        elif user_choise == '1':
+            user_title = input('Введите название файла: ')
+            user_text = input("Введите текст: ")
+            dict_comandos[user_choise](user_title, user_text)
+        elif user_choise == '6':
+            print("Досвидание!")
+            break
+        else:
+            dict_comandos[user_choise]()
+        input("Введите что-нибудь, чтобы продолжить: ")
