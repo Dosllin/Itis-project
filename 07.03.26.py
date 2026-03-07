@@ -1,1 +1,77 @@
-import numpy as np### 1class EvenIterator:    def __init__(self, integer):        self.integer_list = [x for x in range(2, integer + 1,2)]        self.index = 0    def __iter__(self):        return self    def __next__(self):        if self.index < len(self.integer_list):            result = self.integer_list[self.index]            self.index += 1            return result        raise StopIterationprint('-EvenIterator-')for i in EvenIterator(10):    print(i)print('----------')### 2class ReverseList():    def __init__(self, list):        self.list = list[::-1]        self.index = 0    def __iter__(self):        return self    def __next__(self):        if self.index < len(self.list):            result = self.list[self.index]            self.index += 1            return result        raise StopIterationprint('--Reverse--')data = [10,20,30]for i in ReverseList(data):    print(i)print('----------')# 2 ЧАСТЬ### 3print('--Array--')arr = np.array([3, 7, 1, 9, 4])print(arr.max())print(arr.mean())print('----------')### 4print('---->5----')arr = np.array([2, 8, 4, 10, 3])print(arr[arr>5])print('----------')### 5print('----+----')a = np.array([1, 2, 3])b = np.array([4, 5, 6])c = a+bprint(c.sum())print('----------')### 6print('----*3----')arr = np.array([1, 2, 3, 4])arr1 = arr*3print(arr1)print('----------')
+import numpy as np
+
+
+### 1
+class EvenIterator:
+    def __init__(self, integer):
+        self.integer_list = [x for x in range(2, integer + 1,2)]
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.integer_list):
+            result = self.integer_list[self.index]
+            self.index += 1
+            return result
+        raise StopIteration
+print('-EvenIterator-')
+
+for i in EvenIterator(10):
+    print(i)
+
+print('----------')
+
+### 2
+class ReverseList():
+    def __init__(self, list):
+        self.list = list[::-1]
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.list):
+            result = self.list[self.index]
+            self.index += 1
+            return result
+        raise StopIteration
+print('--Reverse--')
+data = [10,20,30]
+for i in ReverseList(data):
+    print(i)
+print('----------')
+
+
+# 2 ЧАСТЬ
+### 3
+print('--Array--')
+arr = np.array([3, 7, 1, 9, 4])
+print(arr.max())
+print(arr.mean())
+print('----------')
+
+### 4
+print('---->5----')
+
+arr = np.array([2, 8, 4, 10, 3])
+
+print(arr[arr>5])
+print('----------')
+
+### 5
+print('----+----')
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+c = a+b
+print(c.sum())
+print('----------')
+
+### 6
+print('----*3----')
+arr = np.array([1, 2, 3, 4])
+arr1 = arr*3
+print(arr1)
+print('----------')
