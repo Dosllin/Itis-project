@@ -10,9 +10,9 @@ test_program = {
            '2': ['0', 'L', 'q2'] },
 }
 
-def turing(program, string):
-    command = 'q1'
-    index_str = 0
+def turing(program, string, start_command='q1', starting_index=0):
+    command = start_command
+    index_str = starting_index
     list_str = list(string)
     while command != '!':
         letter = list_str[index_str]
@@ -31,6 +31,7 @@ def turing(program, string):
             command = action[2]
         else:
             raise ValueError
-        return ''.join(list_str)
+    return ''.join(list_str)
+
 print(test_str, turing(test_program, test_str))
 
